@@ -42,9 +42,9 @@ THEN I am taken to the corresponding section of the README
 
 ## Important Links
 
-- [Deployed URL](https://caitlyn-griffing.github.io/readme-generator/)
+- [Deployed URL](https://caitlyn-griffing.github.io/team-profile-generator/)
 
-- [GitHub URL](https://github.com/caitlyn-griffing/readme-generator)
+- [GitHub URL](https://github.com/caitlyn-griffing/team-profile-generator)
 
 
 ---
