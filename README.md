@@ -52,13 +52,13 @@ THEN I am taken to the corresponding section of the README
 ## Images of Deployed Web Page
 
 
-![Image 1](assets/images/tpSS1.png)
+![Image 1](images/tpSS1.png)
 
-![Image 2](assets/images/tpSS2.png)
+![Image 2](images/tpSS2.png)
 
-![Image 3](assets/images/tpSS3.png)
+![Image 3](images/tpSS3.png)
 
-![Image 4](assets/images/tpSS4.png)
+![Image 4](images/tpSS4.png)
 
-![Image 5](assets/images/tpSS5.png)
+![Image 5](images/tpSS5.png)
 
