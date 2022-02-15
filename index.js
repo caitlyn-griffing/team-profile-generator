@@ -1,6 +1,12 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const Employee = require('./lib/Employee');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+const Manager = require('./lib/Manager');
+
+const employeeArray = [];
+
 
 // Create a function to write HTML file
 function writeToFile(data) {
@@ -9,7 +15,116 @@ function writeToFile(data) {
     });
 }
 
-console.log(inquirer.prompt(writeToFile));
+// MANAGER QUESTIONS AND ANSWERS FOR NAME, ID, EMAIL, OFFICE NUMBER CHOICE
+
+const managerInfo = [
+    {
+        type: "input",
+        name: "name",
+        message: "Enter Managers Name Here"
+    },
+    {
+        type: "input",
+        name: "id",
+        message: "Enter Managers Id Number Here"
+    },
+    {
+        type: "input",
+        name: "email",
+        message: "Enter Managers Email Here"
+    },
+    {
+        type: "list",
+        name: "officeNumber",
+        message: "Pick Correct Office Number",
+        choices: ['555-555-5555', '777-777-7777', '999-999-9999'],
+    },
+]
+
+// PROMPT MANAGER QUESTIONS AND ANSWERS ABOVE (NAME, ID, EMAIL, OFFICE NUMBER CHOICES)
+
+function managerPrompt() {
+    inquirer.prompt(managerInfo).then(answer => {
+        // write html here
+        const managerHtml = `
+        <div class="card border border-secondary bg-dark shadow bg-opacity-25 col-3">
+            <div class="card-body">
+                <div class="card-top rounded bg-dark text-white px-4 py-3 border border-secondary">
+                    <h3 class="card-title">Manager</h3>
+                    <h5 class="card-subtitle">${answer.name}</h5>
+                </div>
+                <div class="py-3 information">
+                    <div class='rounded border border-secondary px-2 p-1' id="empID">${answer.id}</div>
+                    <div class='rounded border border-secondary px-2 p-1' id="empEmail">${answer.email}</div>
+                    <div class='rounded border border-secondary px-2 p-1' id="empOther">${answer.officeNumber}</div>
+                </div>
+            </div>
+        </div>
+        `
+
+        employeeArray.push(managerHtml)
+        console.log(managerHtml);
+
+        console.log(answer);
+    })
+}
+
+const internInfo = [
+    {
+        type: "input",
+        name: "name",
+        message: "Enter Interns Name Here"
+    },
+    {
+        type: "input",
+        name: "id",
+        message: "Enter Interns Id Number Here"
+    },
+    {
+        type: "input",
+        name: "email",
+        message: "Enter Interns Email Here"        
+    },
+    {
+        type: "input",
+        name: "school",
+        message: "Enter the School the Intern Attended"        
+    },
+]
+
+function internPrompt () {
+    inquirer.prompt(internInfo).then(answer => {
+        // write html here
+        const internHtml = `
+        <div class="card border border-secondary bg-dark shadow bg-opacity-25 col-3">
+            <div class="card-body">
+                <div class="card-top rounded bg-dark text-white px-4 py-3 border border-secondary">
+                    <h3 class="card-title">Manager</h3>
+                    <h5 class="card-subtitle">${answer.name}</h5>
+                </div>
+                <div class="py-3 information">
+                    <div class='rounded border border-secondary px-2 p-1' id="empID">${answer.id}</div>
+                    <div class='rounded border border-secondary px-2 p-1' id="empEmail">${answer.email}</div>
+                    <div class='rounded border border-secondary px-2 p-1' id="empOther">${answer.school}</div>
+                </div>
+            </div>
+        </div>
+        `
+    
+        employeeArray.push(internHtml)
+        console.log(internHtml);
+    
+        console.log(answer);
+    })
+}
+
+
+// console.log(`${Employee}`);
+// console.log(`${Engineer}`);
+// console.log(`${Intern}`);
+// console.log(`${Manager}`);
+// console.log(`${writeToFile}`);
+
 
 
 // MAIN HTML
