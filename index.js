@@ -119,6 +119,33 @@ function internPrompt () {
 }
 
 
+function engineerPrompt () {
+    inquirer.prompt(engineerInfo).then(answer => {
+        // write html here
+        const engineerHtml = `
+        <div class="card border border-secondary bg-dark shadow bg-opacity-25 col-3">
+            <div class="card-body">
+                <div class="card-top rounded bg-dark text-white px-4 py-3 border border-secondary">
+                    <h3 class="card-title">Manager</h3>
+                    <h5 class="card-subtitle">${answer.name}</h5>
+                </div>
+                <div class="py-3 information">
+                    <div class='rounded border border-secondary px-2 p-1' id="empID">${answer.id}</div>
+                    <div class='rounded border border-secondary px-2 p-1' id="empEmail">${answer.email}</div>
+                    <div class='rounded border border-secondary px-2 p-1' id="empOther">${answer.github}</div>
+                </div>
+            </div>
+        </div>
+        `
+    
+        employeeArray.push(engineerHtml)
+        console.log(engineerHtml);
+    
+        console.log(answer);
+    })
+}
+
+
 // console.log(`${Employee}`);
 // console.log(`${Engineer}`);
 // console.log(`${Intern}`);
