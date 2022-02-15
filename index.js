@@ -43,7 +43,7 @@ const managerInfo = [
 
 // PROMPT MANAGER QUESTIONS AND ANSWERS ABOVE (NAME, ID, EMAIL, OFFICE NUMBER CHOICES)
 
-function managerPrompt() {
+async function managerPrompt() {
     inquirer.prompt(managerInfo).then(answer => {
         // write html here
         const managerHtml = `
@@ -51,7 +51,7 @@ function managerPrompt() {
             <div class="card-body">
                 <div class="card-top rounded bg-dark text-white px-4 py-3 border border-secondary">
                     <h3 class="card-title">Manager</h3>
-                    <h5 class="card-subtitle">${answer.name}</h5>
+                    <h4 class="card-subtitle">${answer.name}</h5>
                 </div>
                 <div class="py-3 information">
                     <div class='rounded border border-secondary px-2 p-1' id="empID">${answer.id}</div>
@@ -66,6 +66,9 @@ function managerPrompt() {
         console.log(managerHtml);
 
         console.log(answer);
+
+        addEmployee();
+
     })
 }
 
@@ -92,15 +95,15 @@ const internInfo = [
     },
 ]
 
-function internPrompt () {
-    inquirer.prompt(internInfo).then(answer => {
+async function internPrompt () {
+    await inquirer.prompt(internInfo).then(answer => {
         // write html here
         const internHtml = `
         <div class="card border border-secondary bg-dark shadow bg-opacity-25 col-3">
             <div class="card-body">
                 <div class="card-top rounded bg-dark text-white px-4 py-3 border border-secondary">
-                    <h3 class="card-title">Manager</h3>
-                    <h5 class="card-subtitle">${answer.name}</h5>
+                    <h3 class="card-title">Intern</h3>
+                    <h4 class="card-subtitle">${answer.name}</h5>
                 </div>
                 <div class="py-3 information">
                     <div class='rounded border border-secondary px-2 p-1' id="empID">${answer.id}</div>
@@ -115,19 +118,43 @@ function internPrompt () {
         console.log(internHtml);
     
         console.log(answer);
+        addEmployee();
     })
 }
 
 
-function engineerPrompt () {
-    inquirer.prompt(engineerInfo).then(answer => {
+const engineerInfo = [
+    {
+        type: "input",
+        name: "name",
+        message: "Enter Engineer Name Here"
+    },
+    {
+        type: "input",
+        name: "id",
+        message: "Enter Engineer Id Number Here"
+    },
+    {
+        type: "input",
+        name: "email",
+        message: "Enter Engineer Email Here"        
+    },
+    {
+        type: "input",
+        name: "github",
+        message: "Enter your GitHub username"        
+    },
+]
+
+async function engineerPrompt () {
+    await inquirer.prompt(engineerInfo).then(answer => {
         // write html here
         const engineerHtml = `
         <div class="card border border-secondary bg-dark shadow bg-opacity-25 col-3">
             <div class="card-body">
                 <div class="card-top rounded bg-dark text-white px-4 py-3 border border-secondary">
-                    <h3 class="card-title">Manager</h3>
-                    <h5 class="card-subtitle">${answer.name}</h5>
+                    <h3 class="card-title">Engineer</h3>
+                    <h4 class="card-subtitle">${answer.name}</h5>
                 </div>
                 <div class="py-3 information">
                     <div class='rounded border border-secondary px-2 p-1' id="empID">${answer.id}</div>
@@ -142,8 +169,88 @@ function engineerPrompt () {
         console.log(engineerHtml);
     
         console.log(answer);
+        addEmployee();
     })
 }
+
+async function addEmployee() {
+    await inquirer.prompt([
+        {
+            type: "input",
+            name: "addEmployee",
+            message: "Do you want to add employee?"
+        },
+    ])
+    .then(answer => {
+        if(answer.addEmployee == "yes") {
+            chooseEmployee();
+        }
+        else if (answer.addEmployee == "no") {
+            employeeArray.join('');
+            const html = `
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+            
+                <title>Fake Website</title>
+            </head>
+            <body>
+
+                <div class="wrapper">
+                    <header class="h1 p-5 bg-warning text-light">Team Profile</header>
+                    <div class="container px-4">
+                        <div class="row p-5 g-5">
+                            ${employeeArray}
+                        </div>
+                    </div>
+                </div>
+                
+                
+
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+            </body>
+            `
+            writeToFile(html);
+        }
+        
+    })
+}
+
+async function chooseEmployee() {
+    await inquirer.prompt([
+        {
+            type: "input",
+            name: "chooseEmployee",
+            message: "Which employee would you like to add?"
+        }
+    ])
+    .then(answer => {
+        if(answer.chooseEmployee == "intern") {
+            internPrompt()
+        }
+        else if (answer.chooseEmployee == "engineer") {
+            engineerPrompt();
+        }
+
+    })
+}
+
+function start() {
+    managerPrompt();
+    // addEmployee();
+
+}
+
+function init() {
+    start();
+}
+
+init();
 
 
 // console.log(`${Employee}`);
@@ -156,22 +263,12 @@ function engineerPrompt () {
 
 // MAIN HTML
 // ! doc
-// <!DOCTYPE html>
-// <html lang="en">
-// <head>
-//     <meta charset="UTF-8">
-//     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-//     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-//     <title>Fake Website</title>
-// </head>
 // <body>
 
 //      INPUT EMPLOYEE CARDS (ETC)
 
-//      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+//      
 
 // </body>
 // </html>
@@ -179,16 +276,16 @@ function engineerPrompt () {
 
 
 // wrapper
-// <div class="wrapper"></div>
+// 
 
 // 2. Header
-// <header class="h1 p-5 bg-warning text-light">Team Profile</header>
+// 
 
 // 3. Container holding ALL Employee Cards
-//  <div class="container px-4"></div>
+//  
 
 // 4. ROW Container to hold cards
-// <div class="row p-5 gx-5"></div>
+// 
 
 // 5. CARD Container 
 //  <div class="card border border-secondary bg-dark shadow bg-opacity-25 col-3"></div>
