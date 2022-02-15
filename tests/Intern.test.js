@@ -1,18 +1,18 @@
 const Intern = require('../lib/Intern');
 
-let newIntern = new Intern('spongebob', 22222, 'sponge@bob.com', 'spongebob5000');    
+let newIntern = new Intern('barbie', 33333, 'barbie@girl.com', 'Barbie University');    
 describe('Intern Methods', () => {    
     test('Get Name Method', () => {    
-        expect(newIntern.getName()).toEqual('spongebob');    
+        expect(newIntern.getName()).toEqual('barbie');    
     })    
     test('Get Id Method', () => {       
-        expect(newIntern.getId()).toEqual(22222);    
+        expect(newIntern.getId()).toEqual(33333);    
     })    
     test('Get Email Method', () => {    
-        expect(newIntern.getEmail()).toEqual('sponge@bob.com');    
+        expect(newIntern.getEmail()).toEqual('barbie@girl.com');    
     })    
-    test('Get Git Method', () => {    
-        expect(newIntern.getGitHub()).toEqual('spongebob5000');    
+    test('Get School Method', () => {    
+        expect(newIntern.getSchool()).toEqual('Barbie University');    
     })    
     test('Get Role Method', () => {    
         expect(newIntern.getRole()).toEqual('Intern');    
